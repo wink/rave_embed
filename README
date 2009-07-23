@@ -1,13 +1,100 @@
 RaveEmbed
 =========
 
-Introduction goes here.
+What is RaveEmbed?
 
+RaveEmbed is a Ruby on Rails plugin that allows you to use Ruby to embed a Google Wave onto any page in your app. It allows you to configure your Google Wave settings using a simple Ruby method and it will generate the properly formatted Google Wave Embed API javascript automatically.
+
+RaveEmbed is federation agnostic, meaning it's been designed to work with any Wave provider. But since Google is currently the ONLY Wave provider, we provide sensible default settings that will work with Google.
+
+The bottom line is: with just a couple lines of code, you can add some of the most robust, feature rich communication and collaboration tools ever invented to your app.
+
+
+What is Google Wave?
+
+Google Wave is a product that helps users communicate and collaborate on the web. A "wave" is equal parts conversation and document, where users can almost instantly communicate and work together with richly formatted text, photos, videos, maps, and more. Google Wave is also a platform with a rich set of open APIs that allow developers to embed waves in other web services and to build extensions that work inside waves.
+
+Start by viewing the Google I/O presentation given by the creators of this revolutionary communication tool.
+http://www.youtube.com/watch?v=v_UyVmITiYQ
+
+To sign up for a Google Wave account, go to:
+http://wave.google.com/
+
+If you want to dig deeper into the Google Wave API, go to: 
+http://code.google.com/apis/wave/
+
+
+Dependencies
+============
+
+Currently, this plugin relies on the jQuery javascript framework. Only one line in the entire plugin requires it, so a dependency-free version of this plugin may be on the way.
+
+Installation
+============
+
+1) First, install jQuery. Copy the javascript files from the jQuery website (http://docs.jquery.com/Downloading_jQuery) into your public/javascripts/ folder.
+
+2) From your app root directory, type "script/plugin install git://github.com/wink/rave_embed.git"
+
+3) In your layout template, add this line to the <head> section:
+    <%= RaveEmbed::JsInclude.to_html %>
 
 Example
 =======
 
-Example goes here.
+Hello World!
+------------
+
+The simplest way to embed an existing Wave into a view:
+
+<%= RaveEmbed::WavePanel.new('my_wave_id').to_html %>
+<div id='waveframe'></div>
+
+Be sure to replace 'my_wave_id' with the actual id of the Wave you want to embed.
 
 
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+Display Options
+---------------
+
+RaveEmbed works with Google Wave by default, but can be configured to work with any Wave provider (a.k.a. federation). RaveEmbed also allows you to customize the look and feel of the Wave to match your page. The plugin supports the following options:
+
+  :function_name      This is the name of the javascript function that draws the Wave on the page. 
+                        Default: 'wavePanelInit'
+  :dom_id             This is id of the empty div container to be replaced with the Wave panel.
+                        Default: 'waveframe'
+  :root_url           This is the Wave server instance url. It currently points to the Google Wave servers,
+                      but could be configured to point to any Wave provider (e.g. corporate intranets).
+                        Default: 'https://wave.google.com/a/wavesandbox.com/'
+  :bg_color           Customize the background color with a hex code string. (e.g. '#333333', '#999', 'green')
+                        Default: nil (uses whatever Google chooses as it's default)
+  :color              Customize the text color with a hex code string. (e.g. '#333333', '#999', 'green')
+                        Default: nil (uses whatever Google chooses as it's default)
+  :font               Customize the text font with a font string. (e.g. 'Arial')
+                        Default: nil (uses whatever Google chooses as it's default)              
+  :font_size          Customize the text font with a font size integer (in points). (e.g. 10, 12, 20)
+                        Default: nil (uses whatever Google chooses as it's default)              
+  
+Fully configured example
+------------------------
+
+module WavePanelHelper
+  def wave_panel
+    wave_panel = RaveEmbed::WavePanel.new('my_wave_id',
+                             :function_name => 'wavePanelStart',
+                             :dom_id => 'wave_container',
+                             :root_url => 'https://wave.mycompany.com/',
+                             :bg_color => 'green',
+                             :color => '#FFFFFF',
+                             :font => 'Arial',
+                             :font_size => 12)
+    wave_panel.to_html
+  end
+end
+
+# And in your view:
+
+<%= wave_panel %>
+<div id="wave_container" style="width: 500px; height: 100%"></div>
+
+
+Copyright (c) 2009 Micah Winkelspecht, released under the MIT license
