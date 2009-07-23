@@ -1,0 +1,9 @@
+<script type='text/javascript'>
+function myFunction() {
+  var wavePanel = new WavePanel('http://mywave.acme.com');
+  wavePanel.loadWave('my_id');
+  wavePanel.setUIConfig('green', 'white', 'Arial', '12pts');
+  wavePanel.init(document.getElementById('give_me_a_dom_id'));
+};
+$(myFunction())
+</script>
