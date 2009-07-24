@@ -95,7 +95,7 @@ end
 
 # And in your view:
 
-<%= wave_panel %>
+<%= wave_panel('my_wave_id') %>
 <div id="wave_container" style="width: 500px; height: 100%"></div>
 
 
