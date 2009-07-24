@@ -2,6 +2,7 @@ RaveEmbed
 =========
 
 What is RaveEmbed?
+------------------
 
 RaveEmbed is a Ruby on Rails plugin that allows you to use Ruby to embed a Google Wave onto any page in your app. It allows you to configure your Google Wave settings using a simple Ruby method and it will generate the properly formatted Google Wave Embed API javascript automatically.
 
@@ -11,6 +12,7 @@ The bottom line is: with just a couple lines of code, you can add some of the mo
 
 
 What is Google Wave?
+--------------------
 
 Google Wave is a product that helps users communicate and collaborate on the web. A "wave" is equal parts conversation and document, where users can almost instantly communicate and work together with richly formatted text, photos, videos, maps, and more. Google Wave is also a platform with a rich set of open APIs that allow developers to embed waves in other web services and to build extensions that work inside waves.
 
