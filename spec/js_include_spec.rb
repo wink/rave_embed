@@ -2,12 +2,12 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 describe RaveEmbed::JsInclude do
   before do
-    RaveEmbed.embed_js_url = 'http://wave-api.appspot.com/public/embed.js'
+    RaveEmbed::JsInclude.embed_js_url = 'http://wave-api.appspot.com/public/embed.js'
   end
   
   describe "constructor:" do
     before do
-      @js_include = RaveEmbed::JsInclude.new('http://wave.federation.com/public/embed.js')
+      @js_include = RaveEmbed::JsInclude.new(:embed_js_url => 'http://wave.federation.com/public/embed.js')
     end
     
     it "has an attribute called 'embed_js_url'" do

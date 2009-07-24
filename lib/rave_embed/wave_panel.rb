@@ -1,18 +1,34 @@
-class RaveEmbed
+module RaveEmbed
   class WavePanel
+    include ClassLevelInheritableAttributes
+    
+    cattr_inheritable   :g_public_address, :g_root_url, :g_function_name, :g_dom_id, 
+                        :g_bg_color, :g_color, :g_font, :g_font_size, :g_is_public, :g_embed_js_url
+    @g_public_address      = "public@a.gwave.com"        
+    @g_root_url            = "https://wave.google.com/a/wavesandbox.com/"
+    @g_function_name       = 'wavePanelInit'
+    @g_dom_id              = 'waveframe'
+    @g_is_public           = true
+    
+    
     
     attr_accessor :wave_id, :function_name, :dom_id, :root_url, :bg_color, :color, :font, :font_size, :participants, :is_public
   
     def initialize(wave_id_str, opts = {})
       @wave_id       = wave_id_str
-      @function_name = opts[:function_name] || RaveEmbed.function_name
-      @dom_id        = opts[:dom_id]        || RaveEmbed.dom_id
-      @root_url      = opts[:root_url]      || RaveEmbed.root_url
-      @bg_color      = opts[:bg_color]      || RaveEmbed.bg_color
-      @color         = opts[:color]         || RaveEmbed.color
-      @font          = opts[:font]          || RaveEmbed.font
-      @font_size     = opts[:font_size]     || RaveEmbed.font_size
-      @is_public     = opts[:is_public].nil? or opts[:is_public]
+      @function_name = opts[:function_name] || WavePanel.g_function_name
+      @dom_id        = opts[:dom_id]        || WavePanel.g_dom_id
+      @root_url      = opts[:root_url]      || WavePanel.g_root_url
+      @bg_color      = opts[:bg_color]      || WavePanel.g_bg_color
+      @color         = opts[:color]         || WavePanel.g_color
+      @font          = opts[:font]          || WavePanel.g_font
+      @font_size     = opts[:font_size]     || WavePanel.g_font_size
+      @is_public = if opts[:is_public].nil?
+        WavePanel.g_is_public
+      else
+        opts[:is_public] ? true : false
+      end
+      # @is_public     = opts[:is_public].nil? or opts[:is_public]
       @participants  = opts[:participants]  || []
       validate
     end
@@ -27,7 +43,7 @@ class RaveEmbed
     end
     
     def participants
-      @participants << RaveEmbed.public_address if is_public?
+      @participants << WavePanel.g_public_address if is_public?
       @participants
     end
     
@@ -68,5 +84,5 @@ class RaveEmbed
     
   end
   
-  class WavePanelError < Exception; end
+  class RaveEmbed::WavePanelError < Exception; end
 end

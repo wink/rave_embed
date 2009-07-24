@@ -1,70 +1,61 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe RaveEmbed::WavePanel do
-  before do
-    RaveEmbed.public_address = "public@a.gwave.com"
-    RaveEmbed.root_url = "https://wave.google.com/a/wavesandbox.com/"
-    RaveEmbed.function_name = 'wavePanelInit'
-    RaveEmbed.dom_id = 'waveframe'
-    RaveEmbed.bg_color = nil
-    RaveEmbed.color = nil
-    RaveEmbed.font = nil
-    RaveEmbed.font_size = nil
-    RaveEmbed.is_public = true
-  end
   
   describe "constructor:" do
-    before do
-      @wave_panel = RaveEmbed::WavePanel.new('my_wave_id',
-                      :function_name => 'myFunction',
-                      :dom_id => 'give_me_a_dom_id',
-                      :root_url => 'http://mywave.acme.com',
-                      :bg_color => 'green', 
-                      :color => 'white',
-                      :font => 'Arial',
-                      :font_size => 12,
-                      :participants => ['greg@waveexample.com', 'bob@waveexample.com'],
-                      :is_public => false)
-    end
+    describe "with_config" do
+      before do
+        @wave_panel = RaveEmbed::WavePanel.new('my_wave_id',
+                        :function_name => 'myFunction',
+                        :dom_id => 'give_me_a_dom_id',
+                        :root_url => 'http://mywave.acme.com',
+                        :bg_color => 'green', 
+                        :color => 'white',
+                        :font => 'Arial',
+                        :font_size => 12,
+                        :participants => ['greg@waveexample.com', 'bob@waveexample.com'],
+                        :is_public => false)
+      end
     
-    it "has an attribute called 'id'" do
-      @wave_panel.wave_id.should == 'my_wave_id'
-    end
+      it "has an attribute called 'id'" do
+        @wave_panel.wave_id.should == 'my_wave_id'
+      end
     
-    it "has an attribute called 'function_name'" do
-      @wave_panel.function_name.should == 'myFunction'
-    end
+      it "has an attribute called 'function_name'" do
+        @wave_panel.function_name.should == 'myFunction'
+      end
     
-    it "has an attribute called 'dom_id'" do
-      @wave_panel.dom_id.should == 'give_me_a_dom_id'
-    end
+      it "has an attribute called 'dom_id'" do
+        @wave_panel.dom_id.should == 'give_me_a_dom_id'
+      end
     
-    it "has an attribute called 'root_url'" do
-      @wave_panel.root_url.should == 'http://mywave.acme.com'
-    end
+      it "has an attribute called 'root_url'" do
+        @wave_panel.root_url.should == 'http://mywave.acme.com'
+      end
     
-    it "has an attribute called 'bg_color'" do
-      @wave_panel.bg_color.should == 'green'
-    end
+      it "has an attribute called 'bg_color'" do
+        @wave_panel.bg_color.should == 'green'
+      end
     
-    it "has an attribute called 'color'" do
-      @wave_panel.color.should == 'white'
-    end
+      it "has an attribute called 'color'" do
+        @wave_panel.color.should == 'white'
+      end
     
-    it "has an attribute called 'font'" do
-      @wave_panel.font.should == 'Arial'
-    end
+      it "has an attribute called 'font'" do
+        @wave_panel.font.should == 'Arial'
+      end
     
-    it "has an attribute called 'font_size'" do
-      @wave_panel.font_size.should == 12
-    end
+      it "has an attribute called 'font_size'" do
+        @wave_panel.font_size.should == 12
+      end
     
-    it "has an attribute called 'participants'" do
-      @wave_panel.participants.should == ['greg@waveexample.com', 'bob@waveexample.com']
-    end
+      it "has an attribute called 'participants'" do
+        @wave_panel.participants.should == ['greg@waveexample.com', 'bob@waveexample.com']
+      end
     
-    it "has an attribute called 'is_public'" do
-      @wave_panel.is_public.should == false
+      it "has an attribute called 'is_public'" do
+        @wave_panel.is_public.should == false
+      end
     end
     
     describe "when id is blank" do
@@ -170,5 +161,6 @@ describe RaveEmbed::WavePanel do
       end
     end
   end
-  
+
 end
+
