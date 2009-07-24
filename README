@@ -80,8 +80,8 @@ Fully configured example
 ------------------------
 
 module WavePanelHelper
-  def wave_panel
-    wave_panel = RaveEmbed::WavePanel.new('my_wave_id',
+  def wave_panel(wave_id)
+    wave_panel = RaveEmbed::WavePanel.new(wave_id,
                              :function_name => 'wavePanelStart',
                              :dom_id => 'wave_container',
                              :root_url => 'https://wave.mycompany.com/',
