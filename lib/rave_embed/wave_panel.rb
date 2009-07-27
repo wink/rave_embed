@@ -48,13 +48,14 @@ module RaveEmbed
     end
     
     def to_html
-      html = "<script type='text/javascript'>\nfunction #{function_name}() {\n"
+      html = "<script type='text/javascript'>\n"
+      html << "#{function_name} = function() {\n"
       html << "  var wavePanel = new WavePanel('#{root_url}');\n"
       html << "  wavePanel.loadWave('#{wave_id}');\n"
       html << ui_options_js if ui_configured?
       html << "  wavePanel.init(document.getElementById('#{dom_id}'));\n"
       html << "};\n"
-      html << "$(#{function_name}())\n" # This line requires jQuery. It simply calls the function_name function once the DOM has loaded.
+      html << "$(document).ready(#{function_name})\n" # This line requires jQuery. It simply calls the function_name function once the DOM has loaded.
       html << "</script>\n"
     end
     

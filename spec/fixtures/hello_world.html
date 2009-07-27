@@ -1,8 +1,8 @@
 <script type='text/javascript'>
-function wavePanelInit() {
+wavePanelInit = function() {
   var wavePanel = new WavePanel('https://wave.google.com/a/wavesandbox.com/');
   wavePanel.loadWave('my_id');
   wavePanel.init(document.getElementById('waveframe'));
 };
-$(wavePanelInit())
+$(document).ready(wavePanelInit)
 </script>

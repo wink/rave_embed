@@ -1,9 +1,9 @@
 <script type='text/javascript'>
-function wavePanelInit() {
+wavePanelInit = function() {
   var wavePanel = new WavePanel('https://wave.google.com/a/wavesandbox.com/');
   wavePanel.loadWave('my_id');
   wavePanel.setUIConfig('', '', 'Arial', '12pts');
   wavePanel.init(document.getElementById('waveframe'));
 };
-$(wavePanelInit())
+$(document).ready(wavePanelInit)
 </script>
