@@ -1,9 +1,7 @@
+<div id='waveframe' width='100%' height='100%'></div>
 <script type='text/javascript'>
-wavePanelInit = function() {
   var wavePanel = new WavePanel('https://wave.google.com/a/wavesandbox.com/');
   wavePanel.loadWave('my_id');
-  wavePanel.setUIConfig('', '', 'Arial', '12pts');
+  wavePanel.setUIConfig('', '', 'Arial', '12pt');
   wavePanel.init(document.getElementById('waveframe'));
-};
-$(document).ready(wavePanelInit)
 </script>

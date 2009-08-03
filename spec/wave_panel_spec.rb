@@ -6,23 +6,21 @@ describe RaveEmbed::WavePanel do
     describe "with_config" do
       before do
         @wave_panel = RaveEmbed::WavePanel.new('my_wave_id',
-                        :function_name => 'myFunction',
                         :dom_id => 'give_me_a_dom_id',
                         :root_url => 'http://mywave.acme.com',
                         :bg_color => 'green', 
                         :color => 'white',
                         :font => 'Arial',
-                        :font_size => 12,
+                        :font_size => '12pt',
                         :participants => ['greg@waveexample.com', 'bob@waveexample.com'],
-                        :is_public => false)
+                        :is_public => false,
+                        :width => '800px',
+                        :height => '90%',
+                        :jquery => true)
       end
     
       it "has an attribute called 'id'" do
         @wave_panel.wave_id.should == 'my_wave_id'
-      end
-    
-      it "has an attribute called 'function_name'" do
-        @wave_panel.function_name.should == 'myFunction'
       end
     
       it "has an attribute called 'dom_id'" do
@@ -46,7 +44,7 @@ describe RaveEmbed::WavePanel do
       end
     
       it "has an attribute called 'font_size'" do
-        @wave_panel.font_size.should == 12
+        @wave_panel.font_size.should == '12pt'
       end
     
       it "has an attribute called 'participants'" do
@@ -55,6 +53,18 @@ describe RaveEmbed::WavePanel do
     
       it "has an attribute called 'is_public'" do
         @wave_panel.is_public.should == false
+      end
+      
+      it "has an attribute called 'width'" do
+        @wave_panel.width.should == '800px'
+      end
+      
+      it "has an attribute called 'height'" do
+        @wave_panel.height.should == '90%'
+      end
+      
+      it "has an attribute called 'jquery'" do
+        @wave_panel.jquery.should == true
       end
     end
     
@@ -77,10 +87,6 @@ describe RaveEmbed::WavePanel do
     describe "defaults:" do
       before do
         @wave_panel = RaveEmbed::WavePanel.new('my_wave_id')
-      end
-      
-      it "'function_name' defaults to the global RaveEmbed function name" do
-        @wave_panel.function_name.should == 'wavePanelInit'
       end
       
       it "'dom_id' defaults to the global RaveEmbed dom id" do
@@ -110,6 +116,18 @@ describe RaveEmbed::WavePanel do
       it "'is_public' defaults to the global RaveEmbed is_public value" do
         @wave_panel.is_public.should == true
       end
+      
+      it "'width' defaults to the global RaveEmbed width value" do
+        @wave_panel.width.should == '100%'
+      end 
+      
+      it "'height' defaults to the global RaveEmbed height value" do
+        @wave_panel.height.should == '100%'
+      end
+      
+      it "'jquery' defaults to the global RaveEmbed jquery value" do
+        @wave_panel.jquery.should == false
+      end
     end
   end
   
@@ -134,16 +152,28 @@ describe RaveEmbed::WavePanel do
       end
     end
     
-    describe "with full configuration" do
+    describe "with jquery:" do
+      before do
+        @wave_panel = RaveEmbed::WavePanel.new('my_id', :jquery => true)
+      end
+      
+      it "produces html/javascript tag using jquery for loading after dom has loaded" do
+        @wave_panel.to_html.should == load_fixture('hello_world_jquery.html')
+      end
+    end
+    
+    describe "with full configuration:" do
       before do
         @wave_panel = RaveEmbed::WavePanel.new('my_id',
-                        :function_name => 'myFunction',
                         :dom_id => 'give_me_a_dom_id',
                         :root_url => 'http://mywave.acme.com',
                         :bg_color => 'green', 
                         :color => 'white',
                         :font => 'Arial',
-                        :font_size => 12)
+                        :font_size => '12pt',
+                        :width => '800px',
+                        :height => '90%',
+                        :jquery => true)
       end
       
       it "produces a fully configured wave html/javascript tag that can be embedded into a page" do
@@ -151,15 +181,16 @@ describe RaveEmbed::WavePanel do
       end
     end  
     
-    describe "with custom font and default colors" do
+    describe "with custom font and default colors:" do
       before do
-        @wave_panel = RaveEmbed::WavePanel.new('my_id', :font => 'Arial', :font_size => 12)
+        @wave_panel = RaveEmbed::WavePanel.new('my_id', :font => 'Arial', :font_size => '12pt')
       end
 
       it "produces a customized font wave html/javascript tag that can be embedded into a page" do
         @wave_panel.to_html.should == load_fixture('custom_font_default_color.html')
       end
     end
+    
   end
 
 end

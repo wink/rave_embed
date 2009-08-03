@@ -73,7 +73,7 @@ RaveEmbed works with Google Wave by default, but can be configured to work with 
                         Default: nil (uses whatever Google chooses as it's default)
   :font               Customize the text font with a font string. (e.g. 'Arial')
                         Default: nil (uses whatever Google chooses as it's default)              
-  :font_size          Customize the text font with a font size integer (in points). (e.g. 10, 12, 20)
+  :font_size          Customize the text font with a font size string. (e.g. '10px', '12pt', '20pt')
                         Default: nil (uses whatever Google chooses as it's default)              
   
 Fully configured example
@@ -88,7 +88,7 @@ module WavePanelHelper
                              :bg_color => 'green',
                              :color => '#FFFFFF',
                              :font => 'Arial',
-                             :font_size => 12)
+                             :font_size => '12pt')
     wave_panel.to_html
   end
 end
@@ -98,5 +98,10 @@ end
 <%= wave_panel('my_wave_id') %>
 <div id="wave_container" style="width: 500px; height: 100%"></div>
 
+
+Global Defaults
+===============
+
+You can change the global default configuration for your whole app by adding an initializer file into 
 
 Copyright (c) 2009 Micah Winkelspecht, released under the MIT license
