@@ -94,7 +94,7 @@ describe RaveEmbed::WavePanel do
       end
       
       it "'root_url' defaults to the global RaveEmbed root url" do
-        @wave_panel.root_url.should == "https://wave.google.com/a/wavesandbox.com/"
+        @wave_panel.root_url.should == "https://wave.google.com/wave/"
       end
       
       %w(bg_color color font font_size).each do |attr|

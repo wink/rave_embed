@@ -7,7 +7,7 @@ module RaveEmbed
     cattr_inheritable   :g_public_address, :g_root_url, :g_dom_id, :g_bg_color, :g_color, :g_font, 
                         :g_font_size, :g_is_public, :g_embed_js_url, :g_height, :g_width, :g_jquery
     @g_public_address      = 'public@a.gwave.com'
-    @g_root_url            = 'https://wave.google.com/a/wavesandbox.com/'
+    @g_root_url            = 'https://wave.google.com/wave/'
     @g_dom_id              = 'waveframe'
     @g_is_public           = true
     @g_height              = '100%'
@@ -50,8 +50,12 @@ module RaveEmbed
     
     def to_html
       html = "<div id='#{dom_id}'"
-      html << " width='#{width}'" unless width.nil? or width.empty?
-      html << " height='#{height}'" unless height.nil? or height.empty?
+      unless width.blank? and height.blank?
+        styles = []
+        styles << "width:#{width}" unless width.blank?
+        styles << "height:#{height}" unless height.blank?
+        html << " style='#{styles.join(";")}'"
+      end
       html << "></div>\n"
       html << "<script type='text/javascript'>\n"
       html << "$(document).ready({\n" if jquery?
